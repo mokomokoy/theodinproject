@@ -52,13 +52,13 @@ class TicTacToe
     turn(player, gets.chomp)
 
     while board_has_slots?
-      if winner?
-        return p "#{player} wins!"
-      end
       player_index = @players.index(player)
       player = @players[player_index - 1]
       p "#{player}, make your move"
       turn(player, gets.chomp)
+      if winner?
+        return p "#{player} wins!"
+      end
     end
 
     p "The board is full! There is no winner"
