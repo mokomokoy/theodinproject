@@ -1,7 +1,7 @@
 class Game
+  attr_writer :secret
   def initialize
     @secret = 4.times.map { rand(1..6) }
-    p @secret
     @board = {}
   end
 
@@ -12,6 +12,11 @@ class Game
     puts "- wrong guess"
     puts "x right number, wrong place"
     puts "o right number, right place"
+    
+  end
+
+  def codebreaker_game
+    puts "the computer has chosen a secret"
     puts "make your first guess"
 
     while @board.count < 11
