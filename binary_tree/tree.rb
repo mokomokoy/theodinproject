@@ -10,14 +10,11 @@ class Tree
     return if array.length == 0
     return Node.new(array[0]) if array.length == 1
     array.sort_by!(&:to_i).uniq!
-    # p array
     middle = (array.length/2).floor
     root = array[middle]
-    # p "ROOT" + root
     left = build_tree(array[0 ... middle])
     right = build_tree(array[middle+1 .. -1])
     node = Node.new(root, left, right)
-    # node.to_s
     @tree.push(node)
     node
   end
@@ -30,12 +27,23 @@ class Tree
 
   end
 
-  def depth(node)
-
+  def depth(node = @root)
+    depth = 0
+    left = node.left
+    right = node.right
+    until left == nil && right == nil
+      left = left ? left.left || left.right : nil
+      right = right ? right.left || right.right : nil
+      depth += 1
+    end
+    depth
   end
 
   def balanced?
-
+    left_depth = depth(@root.left)
+    right_depth = depth(@root.right)
+    p left_depth, right_depth
+    left_depth - right_depth < 2 && left_depth - right_depth > -2
   end
 
   def rebalance!

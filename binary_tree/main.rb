@@ -9,3 +9,5 @@ tree.level_order {|node| node.to_s}
 p tree.inorder
 p tree.preorder
 p tree.postorder
+p tree.depth(tree.find('56'))
+p tree.balanced?
