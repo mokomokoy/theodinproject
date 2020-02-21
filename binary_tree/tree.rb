@@ -19,12 +19,57 @@ class Tree
     node
   end
 
-  def insert(value)
+  def insert(value, node = @root)
+    return unless find(value).nil?
 
+    new_node = Node.new(value)
+    if value <= node.data
+      if node.left.nil?
+        node.left = new_node
+        @tree.push(new_node)
+        return new_node
+      end
+      insert(value, node.left)
+    else
+      if node.right.nil?
+        node.right = new_node
+        @tree.push(new_node)
+        return new_node
+      end
+      insert(value, node.right)
+    end
   end
 
   def delete(value)
+    node = find(value)
+    return if node.nil?
+    children = [node.left, node.right]
+    # node has no children
+    if children.all? {|item| item.nil?}
 
+    end
+
+    # node has one child
+    child = children.select {|item| !item.nil?}
+    parent = @tree.find do |node|
+      node.left == value || node.right == value
+    end
+    if parent.left.data == value
+      parent.left = child
+    end
+    if parent.right.data == value
+      parent.right = child
+    end
+
+    # node has two children
+
+  end
+
+  def delete_node(node)
+    until current_node == nil
+      current_node = current_node.left || current_node.right
+
+    end
   end
 
   def depth(node = @root)
@@ -42,7 +87,6 @@ class Tree
   def balanced?
     left_depth = depth(@root.left)
     right_depth = depth(@root.right)
-    p left_depth, right_depth
     left_depth - right_depth < 2 && left_depth - right_depth > -2
   end
 

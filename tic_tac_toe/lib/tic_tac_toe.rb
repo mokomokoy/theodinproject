@@ -1,5 +1,7 @@
 class TicTacToe
-  def initialize
+  attr_reader :board
+
+  def initialize(board = {})
     @board = {
         "a1" => nil,
         "a2" => nil,
@@ -10,7 +12,7 @@ class TicTacToe
         "c1" => nil,
         "c2" => nil,
         "c3" => nil,
-    }
+    }.merge(board)
     @winning_combinations =
         [
           %w(a1 a2 a3),
@@ -85,5 +87,5 @@ class TicTacToe
   end
 end
 
-game = TicTacToe.new
-game.start
+# game = TicTacToe.new
+# game.start
